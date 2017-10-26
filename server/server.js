@@ -6,6 +6,8 @@ let app = new express();
 
 console.log("pues: ", process.env.DB);
 
+console.log("ea: ", process.env);
+
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
