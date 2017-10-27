@@ -11,13 +11,8 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
-
 app.post('/todos', (req, res) => {
 
-  //console.dir(req);
-
-  //res.send(req.body);
-  
   var {text} = req.body;
 
   var todo = new Todo({
@@ -35,3 +30,5 @@ app.post('/todos', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = {app};
