@@ -6,28 +6,29 @@ var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
-const PORT = process.env.PORT || 3000;
-
 var app = new express();
-
 app.use(bodyParser.json());
+
+const PORT = process.env.PORT || 3000;
 
 
 app.post('/todos', (req, res) => {
 
   //console.dir(req);
 
-  res.send(req.body);
+  //res.send(req.body);
   
-  // var todo = new Todo({
-  //   text: 'Desde Heroku'
-  // });
+  var {text} = req.body;
 
-  // todo.save().then((doc) => {
-  //   res.send(doc);
-  // }, (e) => {
-  //   res.send("error: " + e);
-  // });
+  var todo = new Todo({
+    text
+  });
+
+  todo.save().then((doc) => {
+    res.send(doc);
+  }, (e) => {
+    res.status(400).send(e);
+  });
 
 });
 
