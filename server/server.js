@@ -1,52 +1,20 @@
-const express = require('express');
+var {mongoose} = require('./db/mongoose');
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
 
 const PORT = process.env.PORT || 3000;
 
-let app = new express();
-
-console.log("pues: ", process.env.DB);
-
-console.log("ea: ", process.env);
-
-const mongoose = require('mongoose');
-
-mongoose.Promise = global.Promise;
-
-const URL_DB = process.env.DB_URL || "mongodb://127.0.0.1:27017/prueba";
-
-// mongoose.connect('mongodb://root:root@ds231315.mlab.com:31315/prueba', { useMongoClient: true });
-mongoose.connect(URL_DB, { useMongoClient: true });
-
-let Todo = mongoose.model('Todo', {
-  titulo: {
-    type: String,
-    required: true,
-    unique: false,
-    minlength: 5,
-    trim: true
-  },
-  completado: {
-    type: Boolean,
-    default: false
-  },
-  modificado: {
-    type: Number,
-    default: null
-  }
-});
-
-
-
-
+const express = require('express');
+var app = new express();
 
 
 app.get('/', (req, res) => {
 
-  let newTodo = new Todo({
-    titulo: 'Desde Heroku'
+  var todo = new Todo({
+    text: 'Desde Heroku'
   });
 
-  newTodo.save().then((doc) => {
+  todo.save().then((doc) => {
     res.send(doc);
   }, (e) => {
     res.send("error: " + e);

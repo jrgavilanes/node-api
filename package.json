@@ -4,7 +4,8 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "watch": "nodemon server/server.js"
   },
   "engines": {
     "node": "8.7.0",
@@ -17,5 +18,8 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^4.12.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
