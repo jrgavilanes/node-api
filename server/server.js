@@ -1,24 +1,33 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+
+
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
 const PORT = process.env.PORT || 3000;
 
-const express = require('express');
 var app = new express();
 
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
 
-  var todo = new Todo({
-    text: 'Desde Heroku'
-  });
+app.post('/todos', (req, res) => {
 
-  todo.save().then((doc) => {
-    res.send(doc);
-  }, (e) => {
-    res.send("error: " + e);
-  });
+  //console.dir(req);
+
+  res.send(req.body);
+  
+  // var todo = new Todo({
+  //   text: 'Desde Heroku'
+  // });
+
+  // todo.save().then((doc) => {
+  //   res.send(doc);
+  // }, (e) => {
+  //   res.send("error: " + e);
+  // });
 
 });
 
