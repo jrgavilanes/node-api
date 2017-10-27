@@ -2,11 +2,13 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-console.log("yeee",process.argv[2]);
+var URL_DB = process.env.DB_URL || "mongodb://127.0.0.1:27017/dev";
 
-const URL_DB = process.env.DB_URL || "mongodb://127.0.0.1:27017/prueba";
+if (process.argv[2] && process.argv[2].endsWith(".test.js")) {
+    URL_DB = "mongodb://127.0.0.1:27017/test";
+}
 
-
+console.log(`Connected to database -> ${URL_DB}`);
 
 // mongoose.connect('mongodb://root:root@ds231315.mlab.com:31315/prueba', { useMongoClient: true });
 mongoose.connect(URL_DB, { useMongoClient: true });
